@@ -20,8 +20,9 @@ import java.util.Optional;
 @Service
 public class TravelServiceImp implements TravelService {
 
-    private final int BASE_INTERVAL_FOR_SLEEP = 8;
+    private final int BASE_INTERVAL_FOR_STOP = 4;
     private final int BASE_INTERVAL_FOR_MEALS = 3;
+    private final int BASE_INTERVAL_FOR_SLEEP = 16;
     private final double BASE_PERCENTEGE_FOR_PROFIT = 0.55;
 
     @Autowired
@@ -57,9 +58,9 @@ public class TravelServiceImp implements TravelService {
                 .origin(new Origin(travelDTO.getDestinationPointX(), travelDTO.getDestinationPointY(), travelDTO.getDestinationDescription()))
                 .destination(new Destination(travelDTO.getDestinationPointX(), travelDTO.getDestinationPointY(), travelDTO.getDestinationDescription()))
                 .distance(travelDTO.getDistance())
-                .estimatedStops(travelDTO.getEstimatedStops())
+                .suggestionStopsNumber(travelDTO.getSuggestionStopsNumber())
                 .profitableValue(travelDTO.getProfitableValue())
-                .mealsNumber(travelDTO.getMealsNumber())
+                .suggestionMealsNumber(travelDTO.getSuggestionMealsNumber())
                 .trucker(trucker)
                 .vehicle(vehicle)
                 .build();
@@ -71,8 +72,9 @@ public class TravelServiceImp implements TravelService {
     private void mountTravel(TravelDTO travelDTO, Vehicle vehicle, Trucker trucker) {
         setEstimatedCostTravel(travelDTO, vehicle, trucker);
         setEstimatedProfitToTravel(travelDTO);
-        setEstimatedMealsToTravel(travelDTO);
-        setEstimatedStops(travelDTO);
+        setSuggestionMealsNumberToTravel(travelDTO);
+        setSuggestionSleepNumberToTravel(travelDTO);
+        setSuggestionStopsNumberToTravel(travelDTO);
     }
 
     private void setEstimatedCostTravel(TravelDTO travelDTO, Vehicle vehicle, Trucker trucker) {
@@ -106,14 +108,20 @@ public class TravelServiceImp implements TravelService {
 
 
 
-    private void setEstimatedMealsToTravel(TravelDTO travelDTO) {
-       travelDTO.setMealsNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_MEALS));
+    private void setSuggestionMealsNumberToTravel(TravelDTO travelDTO) {
+       travelDTO.setSuggestionMealsNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_MEALS));
     }
 
 
-    private void setEstimatedStops(TravelDTO travelDTO) {
-       travelDTO.setEstimatedStops(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_SLEEP));
+    private void setSuggestionStopsNumberToTravel(TravelDTO travelDTO) {
+       travelDTO.setSuggestionStopsNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_STOP));
     }
+
+    private void setSuggestionSleepNumberToTravel(TravelDTO travelDTO) {
+        travelDTO.setSuggestionSleepNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_SLEEP));
+    }
+
+
 
     private int calculateHoursEstimated(TravelDTO travelDTO, int baseHoursForCalculate) {
         double hours = (double) (travelDTO.getAverageTime() /3600000);
