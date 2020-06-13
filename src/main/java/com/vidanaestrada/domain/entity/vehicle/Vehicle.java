@@ -18,8 +18,10 @@ public class Vehicle {
     private Long id;
     private VEHICLE_CATEGORY transportCategory;
     private int numberAxes;
+    private LOADTYPE loadtype;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "trucker_id", referencedColumnName = "id")
     private Trucker trucker;
 
     @OneToMany(fetch= FetchType.LAZY, cascade=CascadeType.ALL)

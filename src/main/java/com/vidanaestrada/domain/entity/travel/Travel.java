@@ -34,8 +34,9 @@ public class Travel {
     private Destination destination;
 
     private double cost;
-    private double gain;
-    private int averageTime;
+    private double profitableValue;
+    private long averageTime;
     private int mealsNumber;
     private int estimatedStops;
+    private long distance;
 }

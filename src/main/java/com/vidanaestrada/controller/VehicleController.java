@@ -15,7 +15,7 @@ public class VehicleController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void save(@RequestBody Vehicle vehicle) {
-        vehicleService.save(vehicle);
+    public void save(@RequestBody Vehicle vehicle,  @RequestAttribute("truckerId") Long truckerId) {
+        vehicleService.save(vehicle, truckerId);
     }
 }

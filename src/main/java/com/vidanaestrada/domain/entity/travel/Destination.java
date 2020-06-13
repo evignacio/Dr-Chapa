@@ -5,8 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Builder
@@ -17,4 +17,8 @@ public class Destination extends Coordinates {
 
     @OneToOne(mappedBy = "destination")
     private Travel travel;
+
+    public Destination(long pointX, long pointY, String description) {
+        super(pointX, pointY, description);
+    }
 }

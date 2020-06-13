@@ -11,20 +11,21 @@ import lombok.Setter;
 @Setter
 public class TravelDTO {
 
-    private Long trackerId;
+    private Long truckerId;
     private Long vehicleId;
 
-    private String OriginPointX;
-    private String OriginPointY;
+    private long OriginPointX;
+    private long OriginPointY;
     private String OriginDescription;
 
-    private String DestinationPointX;
-    private String DestinationPointY;
+    private long DestinationPointX;
+    private long DestinationPointY;
     private String DestinationDescription;
 
     private double cost;
-    private double gain;
+    private double profitableValue;
     private int mealsNumber;
     private int estimatedStops;
-    private int averageTime;
+    private long averageTime;
+    private long distance;
 }
