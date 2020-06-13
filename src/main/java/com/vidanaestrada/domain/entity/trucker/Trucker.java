@@ -3,6 +3,8 @@ package com.vidanaestrada.domain.entity.user;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @AllArgsConstructor
@@ -11,7 +13,11 @@ import javax.persistence.Entity;
 @Setter
 @Builder
 public class User {
-    private Long Id;
-    private String email;
+    @Id @GeneratedValue
+    private Long id;
+    private String name;
+    private String cpf;
+    private String phone;
     private String password;
+
 }

@@ -1,6 +1,6 @@
 package com.vidanaestrada.application;
 
-import com.vidanaestrada.domain.entity.user.UserDTO;
+import com.vidanaestrada.dto.UserDTO;
 
 public interface UserService {
     void save(UserDTO userDTO);

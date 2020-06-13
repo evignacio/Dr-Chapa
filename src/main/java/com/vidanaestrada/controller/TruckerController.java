@@ -1,13 +1,13 @@
 package com.vidanaestrada.controller;
 
 import com.vidanaestrada.application.UserService;
-import com.vidanaestrada.domain.entity.user.UserDTO;
+import com.vidanaestrada.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("User")
+@RequestMapping("/api/v1/user")
 public class UserController {
 
     @Autowired

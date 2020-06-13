@@ -1,4 +1,4 @@
-package com.vidanaestrada.domain.entity.user;
+package com.vidanaestrada.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO {
-    private String email;
+    private String name;
+    private String cpf;
+    private String phone;
     private String password;
 }
