@@ -1,12 +1,12 @@
 package com.vidanaestrada.domain.repository;
 
-import com.vidanaestrada.domain.entity.user.User;
+import com.vidanaestrada.domain.entity.trucker.Trucker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByCpf(String cpf);
+public interface TruckerRepository extends JpaRepository<Trucker, Long> {
+    Optional<Trucker> findByCpf(String cpf);
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserDTO {
+public class TruckerDTO {
     private String name;
     private String cpf;
     private String phone;

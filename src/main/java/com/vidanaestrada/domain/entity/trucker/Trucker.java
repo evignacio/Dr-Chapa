@@ -1,4 +1,4 @@
-package com.vidanaestrada.domain.entity.user;
+package com.vidanaestrada.domain.entity.trucker;
 
 import lombok.*;
 
@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Builder
-public class User {
+public class Trucker {
     @Id @GeneratedValue
     private Long id;
     private String name;

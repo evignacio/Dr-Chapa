@@ -1,7 +1,7 @@
 package com.vidanaestrada.application;
 
-import com.vidanaestrada.dto.UserDTO;
+import com.vidanaestrada.dto.TruckerDTO;
 
-public interface UserService {
-    void save(UserDTO userDTO);
+public interface TruckerService {
+    void save(TruckerDTO truckerDTO);
 }
