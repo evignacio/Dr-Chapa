@@ -1,7 +1,7 @@
 package com.vidanaestrada.application;
 
-import com.vidanaestrada.domain.entity.travel.Travel;
+import com.vidanaestrada.dto.TravelDTO;
 
 public interface TravelService {
-    public void save(Travel travel);
+    public void save(TravelDTO travelDTO);
 }

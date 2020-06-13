@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,22 +22,21 @@ public class TokenAuthenticationService {
     private static final String  headerString = "Authorization";
 
 
-    static void setTokenInHttpServeletResponse(HttpServletResponse httpServletResponse, String userName) throws IOException, JSONException {
-        String jwt = getTokenJwt(userName);
+    static void setTokenInHttpServeletResponse(HttpServletResponse httpServletResponse, AccountCredential accountCredential) throws IOException, JSONException {
+        String jwt = getTokenJwt(accountCredential.getId());
 
         JSONObject jsonContentResponse = new JSONObject();
         jsonContentResponse.put("accessToken",jwt);
-        jsonContentResponse.put("user", userName);
 
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setCharacterEncoding("utf8");
         httpServletResponse.getWriter().write(String.valueOf(jsonContentResponse));
     }
 
-    private static String getTokenJwt(String userName) {
+    private static String getTokenJwt(Long subject) {
 
         return Jwts.builder()
-                .setSubject(userName)
+                .setSubject(subject.toString())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS512, secretWord)
                 .compact();
@@ -48,14 +48,18 @@ public class TokenAuthenticationService {
 
         if(tokenJwt != null) {
 
-            String userName = Jwts.parser()
+            Long subject =  Long.parseLong(Jwts.parser()
                     .setSigningKey(secretWord)
                     .parseClaimsJws(tokenJwt.replace(tokenPrefix, ""))
                     .getBody()
-                    .getSubject();
+                    .getSubject()
+            );
 
-            if (userName != null)
-                return new UsernamePasswordAuthenticationToken(userName, null, Collections.emptyList());
+            if (!StringUtils.isEmpty(subject)) {
+                httpServletRequest.setAttribute("truckerId", subject);
+                return new UsernamePasswordAuthenticationToken(subject, null, Collections.emptyList());
+            }
+
         }
         return null;
     }

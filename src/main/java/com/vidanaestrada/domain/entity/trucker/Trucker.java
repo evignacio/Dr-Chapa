@@ -21,7 +21,6 @@ public class Trucker {
     private String password;
 
     @OneToMany(fetch= FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name ="trucker_id")
     private List<Travel> listTravel;
 
 }

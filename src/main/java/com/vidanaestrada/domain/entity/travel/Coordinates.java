@@ -6,4 +6,5 @@ import javax.persistence.MappedSuperclass;
 public class Coordinates {
     private String pointX;
     private String pointY;
+    private String description;
 }

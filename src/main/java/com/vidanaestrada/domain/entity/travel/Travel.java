@@ -18,11 +18,11 @@ public class Travel {
     private Long id;
 
     @ManyToOne(fetch= FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name="trucker")
+    @JoinTable(name="trucker_id")
     private Trucker trucker;
 
     @ManyToOne(fetch= FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name="vehicle")
+    @JoinTable(name="vehicle_id")
     private Vehicle vehicle;
 
     @OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)

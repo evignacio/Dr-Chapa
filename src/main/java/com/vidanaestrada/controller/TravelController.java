@@ -1,7 +1,7 @@
 package com.vidanaestrada.controller;
 
 import com.vidanaestrada.application.TravelService;
-import com.vidanaestrada.domain.entity.travel.Travel;
+import com.vidanaestrada.dto.TravelDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,8 @@ public class TravelController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void save(@RequestBody Travel travel) {
-        travelService.save(travel);
+    public void save(@RequestBody TravelDTO travelDTO, @RequestAttribute("truckerId") Long id) {
+        travelDTO.setTrackerId(id);
+        travelService.save(travelDTO);
     }
 }

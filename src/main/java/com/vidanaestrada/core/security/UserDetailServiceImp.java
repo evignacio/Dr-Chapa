@@ -24,6 +24,6 @@ public class UserDetailServiceImp implements UserDetailsService {
             throw new AutenticacaoException("user not found");
 
         Trucker trucker = userOpt.get();
-        return new AccountCredential(trucker.getCpf(), trucker.getPassword());
+        return new AccountCredential(trucker.getId(), trucker.getCpf(), trucker.getPassword());
     }
 }

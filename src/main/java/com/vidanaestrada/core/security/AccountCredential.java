@@ -14,6 +14,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountCredential implements UserDetails {
+    private Long id;
     private String username;
     private String password;
 
