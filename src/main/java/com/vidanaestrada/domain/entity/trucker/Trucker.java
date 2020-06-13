@@ -1,10 +1,10 @@
 package com.vidanaestrada.domain.entity.trucker;
 
+import com.vidanaestrada.domain.entity.travel.Travel;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -19,5 +19,9 @@ public class Trucker {
     private String cpf;
     private String phone;
     private String password;
+
+    @OneToMany(fetch= FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name ="trucker_id")
+    private List<Travel> listTravel;
 
 }

@@ -1,10 +1,11 @@
 package com.vidanaestrada.domain.entity.vehicle;
 
+import com.vidanaestrada.domain.entity.travel.Travel;
+import com.vidanaestrada.domain.entity.trucker.Trucker;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -17,4 +18,12 @@ public class Vehicle {
     private Long id;
     private VEHICLE_CATEGORY transportCategory;
     private int numberAxes;
+
+    @OneToOne
+    private Trucker trucker;
+
+    @OneToMany(fetch= FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name ="vehicle_id")
+    private List<Travel> listTravel;
+
 }
