@@ -33,8 +33,8 @@ public class Travel {
     @JoinColumn(name = "destination_id", referencedColumnName = "id")
     private Destination destination;
 
-    private double cost;
-    private double profitableValue;
+    private long cost;
+    private long profitableValue;
     private long averageTime;
     private int mealsNumber;
     private int estimatedStops;

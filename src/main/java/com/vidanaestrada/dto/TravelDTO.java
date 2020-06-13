@@ -22,8 +22,8 @@ public class TravelDTO {
     private long DestinationPointY;
     private String DestinationDescription;
 
-    private double cost;
-    private double profitableValue;
+    private long cost;
+    private long profitableValue;
     private int mealsNumber;
     private int estimatedStops;
     private long averageTime;

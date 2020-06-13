@@ -1,7 +1,6 @@
 package com.vidanaestrada.application.implementation;
 
 import com.vidanaestrada.application.TravelService;
-import com.vidanaestrada.domain.entity.travel.Coordinates;
 import com.vidanaestrada.domain.entity.travel.Destination;
 import com.vidanaestrada.domain.entity.travel.Origin;
 import com.vidanaestrada.domain.entity.travel.Travel;
@@ -82,8 +81,7 @@ public class TravelServiceImp implements TravelService {
         String constTravel = StringUtils.substringBetween(responseData, "<h2 style=\"margin-top:5px;margin-bottom:5px;\">Total = R$ ", "</h2>");
         constTravel = constTravel.replace(",", "");
 
-        travelDTO.setCost(Double.parseDouble(constTravel));
-
+        travelDTO.setCost(Integer.parseInt(constTravel));
     }
 
     private String doRequestToFreeTableFreight(long distance, Vehicle vehicle) {
@@ -95,30 +93,32 @@ public class TravelServiceImp implements TravelService {
                 distance
         );
 
+
+
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, String.class);
     }
 
 
     private void setEstimatedProfitToTravel(TravelDTO travelDTO) {
-        travelDTO.setProfitableValue(travelDTO.getCost() + (travelDTO.getCost() * BASE_PERCENTEGE_FOR_PROFIT));
+        travelDTO.setProfitableValue((long) (Math.floor(travelDTO.getCost() + (travelDTO.getCost() * BASE_PERCENTEGE_FOR_PROFIT))));
     }
 
 
 
     private void setEstimatedMealsToTravel(TravelDTO travelDTO) {
-       calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_MEALS);
+       travelDTO.setMealsNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_MEALS));
     }
 
 
     private void setEstimatedStops(TravelDTO travelDTO) {
-        calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_SLEEP);
+       travelDTO.setEstimatedStops(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_SLEEP));
     }
 
-    private void calculateHoursEstimated(TravelDTO travelDTO, int baseHoursForCalculate) {
+    private int calculateHoursEstimated(TravelDTO travelDTO, int baseHoursForCalculate) {
         double hours = (double) (travelDTO.getAverageTime() /3600000);
         double roundedHours = Math.floor(hours);
-        travelDTO.setEstimatedStops((int) Math.floor(roundedHours/baseHoursForCalculate));
+        return (int) Math.floor(roundedHours/baseHoursForCalculate);
     }
 
 }
