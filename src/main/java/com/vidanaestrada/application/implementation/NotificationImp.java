@@ -19,6 +19,8 @@ import com.google.firebase.messaging.Notification;
 public class NotificationImp implements NotificationService {
 
     private final Set<String> tokenRegistry = new CopyOnWriteArraySet<>();
+    private Map<String, String> notificationMessageContent =  new HashMap<>();
+    private int sequence = 1;
 
     @Autowired
     private FirebaseMessaging firebaseMessaging;
@@ -33,23 +35,30 @@ public class NotificationImp implements NotificationService {
     }
 
     @Scheduled(fixedDelay = 120_000)
-    private void sendPushMessages() {
+    private void sendNotifications() {
         for (String token : this.tokenRegistry) {
-            System.out.println("Sending personal message to: " + token);
-            Map<String, String> data = new HashMap<>();
-            data.put("text", String.valueOf(Math.random() * 1000));
 
+            setMessage();
             try {
-                sendPersonalMessage(token, data);
+                sendPersonalMessage(token);
             }
             catch (InterruptedException | ExecutionException ignored) {
-
+                        /// logar
             }
         }
     }
 
+    private void setMessage() {
+        if((this.sequence % 2) == 0 ) {
+            notificationMessageContent.put("content", "Que tal uma parada para se alimentar ? Siga seu plano de cuidados e acumule pontos");
+        } else {
+            notificationMessageContent.put("content", "Muito tempo digirindo não é ? um alongamento seria uma boa ideia para evitar dores, no plano de cuidados reservamos algumas dicas para você");
+        }
 
-    private void sendPersonalMessage(String clientToken, Map<String, String> data)
+    }
+
+
+    private void sendPersonalMessage(String clientToken)
             throws InterruptedException, ExecutionException {
         AndroidConfig androidConfig = AndroidConfig.builder()
                 .setTtl(Duration.ofMinutes(2).toMillis()).setCollapseKey("personal")
@@ -61,13 +70,14 @@ public class NotificationImp implements NotificationService {
                 .setAps(Aps.builder().setCategory("personal").setThreadId("personal").build())
                 .build();
 
-        Message message = Message.builder().putAllData(data).setToken(clientToken)
+        Message message = Message.builder().putAllData(this.notificationMessageContent).setToken(clientToken)
                 .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig)
                 .setNotification(new Notification("Personal Message", "A Personal Messag"))
                 .build();
 
         String response = FirebaseMessaging.getInstance().sendAsync(message).get();
         System.out.println("Sent message: " + response);
+        this.sequence++;
     }
 
 }
