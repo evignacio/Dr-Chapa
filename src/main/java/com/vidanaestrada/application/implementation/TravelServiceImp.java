@@ -1,5 +1,8 @@
 package com.vidanaestrada.application.implementation;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.Message;
 import com.vidanaestrada.application.TravelService;
 import com.vidanaestrada.domain.entity.travel.Destination;
 import com.vidanaestrada.domain.entity.travel.Origin;
@@ -20,7 +23,6 @@ import java.util.Optional;
 @Service
 public class TravelServiceImp implements TravelService {
 
-    private final int BASE_INTERVAL_FOR_STOP = 4;
     private final int BASE_INTERVAL_FOR_MEALS = 3;
     private final int BASE_INTERVAL_FOR_SLEEP = 16;
     private final double BASE_PERCENTEGE_FOR_PROFIT = 0.55;
@@ -33,6 +35,7 @@ public class TravelServiceImp implements TravelService {
 
     @Autowired
     private TravelRepository travelRepository;
+
 
     @Override
     public TravelDTO generateTripPlanning(TravelDTO travelDTO) {
@@ -58,14 +61,15 @@ public class TravelServiceImp implements TravelService {
                 .origin(new Origin(travelDTO.getDestinationPointX(), travelDTO.getDestinationPointY(), travelDTO.getDestinationDescription()))
                 .destination(new Destination(travelDTO.getDestinationPointX(), travelDTO.getDestinationPointY(), travelDTO.getDestinationDescription()))
                 .distance(travelDTO.getDistance())
-                .suggestionStopsNumber(travelDTO.getSuggestionStopsNumber())
                 .profitableValue(travelDTO.getProfitableValue())
                 .suggestionMealsNumber(travelDTO.getSuggestionMealsNumber())
+                .suggestionSleepNumber(travelDTO.getSuggestionSleepNumber())
                 .trucker(trucker)
                 .vehicle(vehicle)
                 .build();
 
         travelRepository.save(travel);
+
         return travelDTO;
     }
 
@@ -74,7 +78,6 @@ public class TravelServiceImp implements TravelService {
         setEstimatedProfitToTravel(travelDTO);
         setSuggestionMealsNumberToTravel(travelDTO);
         setSuggestionSleepNumberToTravel(travelDTO);
-        setSuggestionStopsNumberToTravel(travelDTO);
     }
 
     private void setEstimatedCostTravel(TravelDTO travelDTO, Vehicle vehicle, Trucker trucker) {
@@ -112,10 +115,6 @@ public class TravelServiceImp implements TravelService {
        travelDTO.setSuggestionMealsNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_MEALS));
     }
 
-
-    private void setSuggestionStopsNumberToTravel(TravelDTO travelDTO) {
-       travelDTO.setSuggestionStopsNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_STOP));
-    }
 
     private void setSuggestionSleepNumberToTravel(TravelDTO travelDTO) {
         travelDTO.setSuggestionSleepNumber(calculateHoursEstimated(travelDTO, BASE_INTERVAL_FOR_SLEEP));

@@ -25,7 +25,6 @@ public class TravelDTO {
     private long cost;
     private long profitableValue;
     private int suggestionMealsNumber;
-    private int suggestionStopsNumber;
     private int suggestionSleepNumber;
     private long averageTime;
     private long distance;
