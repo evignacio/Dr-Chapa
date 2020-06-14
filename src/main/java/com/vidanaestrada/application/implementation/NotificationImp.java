@@ -52,7 +52,7 @@ public class NotificationImp implements NotificationService {
         if((this.sequence % 2) == 0 ) {
             notificationMessageContent.put("content", "Que tal uma parada para se alimentar ? Siga seu plano de cuidados e acumule pontos");
         } else {
-            notificationMessageContent.put("content", "Muito tempo digirindo não é ? um alongamento seria uma boa ideia para evitar dores, no plano de cuidados reservamos algumas dicas para você");
+            notificationMessageContent.put("content", "Muito tempo digirindo não é ? Um alongamento seria uma boa ideia para evitar dores, no Plano de Cuidados reservamos algumas dicas para você");
         }
 
     }
