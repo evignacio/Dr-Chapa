@@ -14,7 +14,7 @@ Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento
 Crie um banco de dados e atualize as confiurações de conexão no arquivo ``application.properties``
 
 ## Iniciando a aplicação
-Para iniciar a aplicação utilize o comando: ```mvn spring-boot:run``
+Para iniciar a aplicação utilize o comando: ```mvn spring-boot:run```
 
 
 ## Time #244
