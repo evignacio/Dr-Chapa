@@ -11,7 +11,7 @@ Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento
 * [Firebase](https://firebase.google.com/)
 
 ## Instalar
-Crie um banco de dados e atualize as confiurações de conexão no arquivo ``application.properties``
+Crie um banco de dados e atualize as configurações de conexão no arquivo ``application.properties``
 
 ## Iniciando a aplicação
 Para iniciar a aplicação utilize o comando: ```mvn spring-boot:run```
