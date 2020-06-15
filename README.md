@@ -11,6 +11,9 @@ Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento
 * [Firebase](https://firebase.google.com/)
 
 ## Instalação
+Crie um projeto no Firebase para ter acesso ao Firebase para que seja possível utilizar a funcionalidade de envio de notificaçãoes
+Após criar a conta navegue até a aba Configurações -> Conta de Serviços e clique em gerar nova chave privada.
+Coloque o arquivo gerado na pasta ``resources`` dentro do projeto
 Crie um banco de dados e atualize as configurações de conexão no arquivo ``application.properties``
 
 ## Iniciando a aplicação
