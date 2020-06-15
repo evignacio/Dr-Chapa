@@ -1,6 +1,6 @@
 # Dr. Chapa
 
-Dr Chapa é uma aplicação desenvolvida com Ionic, Angular e Capacitor durante o evento Hackathon CCR.
+Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento Hackathon CCR.
 
 ## Front
 [Repositório](https://github.com/vinicius182/CCR-DrChapa)
