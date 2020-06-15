@@ -1,8 +1,8 @@
 package com.vidanaestrada.core.security;
 
 import com.vidanaestrada.core.exception.AutenticacaoException;
-import com.vidanaestrada.domain.entity.user.User;
-import com.vidanaestrada.domain.repository.UserRepository;
+import com.vidanaestrada.domain.entity.trucker.Trucker;
+import com.vidanaestrada.domain.repository.TruckerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,16 +14,16 @@ import java.util.Optional;
 public class UserDetailServiceImp implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private TruckerRepository truckerRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> userOpt =  userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+        Optional<Trucker> userOpt =  truckerRepository.findByCpf(cpf);
 
         if(!userOpt.isPresent())
             throw new AutenticacaoException("user not found");
 
-        User user = userOpt.get();
-        return new AccountCredential(user.getEmail(), user.getPassword());
+        Trucker trucker = userOpt.get();
+        return new AccountCredential(trucker.getId(), trucker.getCpf(), trucker.getPassword());
     }
 }

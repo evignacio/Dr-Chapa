@@ -52,7 +52,8 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
             Authentication auth) throws IOException {
 
         try {
-            TokenAuthenticationService.setTokenInHttpServeletResponse(httpServletResponse, auth.getName());
+            AccountCredential accountCredential = (AccountCredential) auth.getPrincipal();
+            TokenAuthenticationService.setTokenInHttpServeletResponse(httpServletResponse, accountCredential);
         } catch (JSONException e) {
             e.printStackTrace();
         }
