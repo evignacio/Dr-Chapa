@@ -5,6 +5,18 @@ Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento
 ## Aplicação Frontend
 [Repositório](https://github.com/vinicius182/CCR-DrChapa)
 
+## Dependências
+* [Maven](https://maven.apache.org/)
+* [PostgresSql](https://maven.apache.org/)
+* [Firebase](https://firebase.google.com/)
+
+## Instalar
+Crie um banco de dados e atualize as confiurações de conexão no arquivo ``application.properties``
+
+## Iniciando a aplicação
+Para iniciar a aplicação utilize o comando: ```mvn spring-boot:run``
+
+
 ## Time #244
 * [Carlos Gizbert](https://www.linkedin.com/in/gizbert/)
 * [Evandro Ignácio](https://www.linkedin.com/in/evandro-ignacio-658b4814b/)
