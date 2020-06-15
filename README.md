@@ -2,7 +2,7 @@
 
 Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento Hackathon CCR.
 
-## Front
+## Aplicação Frontend
 [Repositório](https://github.com/vinicius182/CCR-DrChapa)
 
 ## Time #244
