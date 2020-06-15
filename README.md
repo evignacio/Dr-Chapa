@@ -1,5 +1,5 @@
 # Dr. Chapa
-
+<img align="left" width="100" height="100" src="logo.png">
 Dr Chapa é uma aplicação desenvolvida com Java e Spring Boot durante o evento Hackathon CCR.
 
 ## Aplicação Frontend
